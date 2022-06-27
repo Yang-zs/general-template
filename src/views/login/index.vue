@@ -42,17 +42,21 @@
 </template>
 
 <script setup>
+import util from '../../utils/deepCopy'
+
+import { useStore } from 'vuex'
 import { reactive, ref, computed } from 'vue'
 import { validatePassword } from './rule'
-import LoginModule from '../../api/login'
+
 import md5 from 'md5'
 const inputType = ref('password')
 const LoginForm = ref()
+
 const loginForm = reactive({
   username: '',
   password: ''
 })
-
+const store = useStore()
 const loginRules = reactive({
   username: [
     {
@@ -76,14 +80,17 @@ const passwordIconStatus = computed(() => {
 
 const handleLoginSubmit = async () => {
   if (!LoginForm.value) return
-  await LoginForm.value.validate(async (valid) => {
-    if (valid) {
-      loginForm.password = md5(loginForm.password)
-      const response = await LoginModule.login(loginForm)
-      console.log(response)
-      loginForm.password = ''
-    }
-  })
+  try {
+    await LoginForm.value.validate(async (valid) => {
+      if (valid) {
+        const newLoginForm = util.deepCopy(loginForm)
+        newLoginForm.password = md5(newLoginForm.password)
+        store.dispatch('user/login', newLoginForm)
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const handllePassWordStatus = () => {

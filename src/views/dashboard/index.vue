@@ -6,7 +6,9 @@
         <el-header>
           <MyNavBar />
         </el-header>
-        <el-main>Main</el-main>
+        <el-main>
+          <Main />
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -15,6 +17,7 @@
 <script setup>
 import MyAside from '../../components/Aside/index.vue'
 import MyNavBar from '../../components/NavBar/index.vue'
+import Main from '../../components/Main/index.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -39,8 +42,8 @@ import MyNavBar from '../../components/NavBar/index.vue'
 .el-main {
   background-color: #e9eef3;
   color: #333;
-
-  line-height: 160px;
+  margin: 0;
+  padding: 0;
 }
 .el-container {
   height: 100%;

@@ -43,15 +43,12 @@
 
 <script setup>
 import util from '../../utils/deepCopy'
-
 import { useStore } from 'vuex'
 import { reactive, ref, computed } from 'vue'
 import { validatePassword } from './rule'
-
 import md5 from 'md5'
 const inputType = ref('password')
 const LoginForm = ref()
-
 const loginForm = reactive({
   username: '',
   password: ''

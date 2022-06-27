@@ -1,5 +1,6 @@
 import UserApi from '../../api/login'
-import router from '@/router'
+import { useRouter } from 'vue-router'
+
 export default {
   namespaced: true,
   state: () => ({
@@ -21,6 +22,7 @@ export default {
         alert('账号或密码错误')
         return
       }
+      const router = useRouter()
       router.push({
         path: '/'
       })

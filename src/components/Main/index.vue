@@ -4,6 +4,7 @@
       <div class="tags">个人中心</div>
     </div>
   </div>
+  <router-view></router-view>
 </template>
 
 <script setup></script>
